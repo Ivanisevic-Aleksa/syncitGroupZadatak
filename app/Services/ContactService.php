@@ -14,6 +14,11 @@ class ContactService
 
     public function storeContact(Request $request){
         $userIds = [];
+
+        if(!$request->has('firstname') || !$request->has('lastname') || !$request->has('phoneType') || !$request->has('number')){
+            return ['message' => 'Submitted data is missing!', 'status' => 'error'];
+        }
+        
         $totalSubmitted = count($request->get('firstname'));
         try{
             for($i = 0; $i < $totalSubmitted; $i++){
