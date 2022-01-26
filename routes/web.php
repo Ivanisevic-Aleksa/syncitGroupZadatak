@@ -13,18 +13,10 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
+// Default route
+Route::get('/', [App\Http\Controllers\ContactController::class, 'contacts']);    
 
 Auth::routes();
 
-Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
-
-Auth::routes();
-
-Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
-
-Auth::routes();
-
-Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+Route::get('/add_contact', [App\Http\Controllers\ContactController::class, 'addContact'])->middleware('auth');
+Route::post('/add_contact', [App\Http\Controllers\ContactController::class, 'storeContact'])->middleware('auth');
